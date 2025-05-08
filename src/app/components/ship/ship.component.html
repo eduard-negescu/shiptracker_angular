@@ -1,0 +1,61 @@
+<!-- components/ship/ship.component.html -->
+<h1 id="tableLabel">Ships</h1>
+
+<!-- Error Message -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Loading Indicator -->
+<p *ngIf="loading$ | async"><em>Loading...</em></p>
+
+<!-- Add Ship Form -->
+<div class="mb-3">
+  <h3>Add New Ship</h3>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" [(ngModel)]="newShip.name" placeholder="Ship name">
+    </div>
+    <div class="col-md-4">
+      <input type="number" class="form-control" [(ngModel)]="newShip.maximumSpeed" placeholder="Maximum speed">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100" (click)="addShip()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ships List -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ship Name</th>
+      <th>Maximum Speed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ship of ships$ | async">
+      <td>{{ ship.id }}</td>
+      <td>
+        <span *ngIf="editingShip?.id !== ship.id">{{ ship.name }}</span>
+        <input *ngIf="editingShip?.id === ship.id" type="text" class="form-control" [(ngModel)]="editedName">
+      </td>
+      <td>
+        <span *ngIf="editingShip?.id !== ship.id">{{ ship.maximumSpeed }}</span>
+        <input *ngIf="editingShip?.id === ship.id" type="number" class="form-control" [(ngModel)]="editedMaxSpeed">
+      </td>
+      <td>
+        <div *ngIf="editingShip?.id !== ship.id" class="btn-group">
+          <button class="btn btn-sm btn-warning me-2" (click)="startEdit(ship)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteShip(ship.id)">Delete</button>
+        </div>
+        <div *ngIf="editingShip?.id === ship.id" class="btn-group">
+          <button class="btn btn-sm btn-success me-2" (click)="updateShip()">Save</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

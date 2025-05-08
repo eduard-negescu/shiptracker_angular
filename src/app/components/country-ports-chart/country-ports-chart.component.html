@@ -1,0 +1,21 @@
+<!-- components/country-ports-chart/country-ports-chart.component.html -->
+<div class="chart-container">
+    <h2>Ports per Country</h2>
+
+    <div *ngIf="isLoading" class="loading-message">
+        <p>Loading chart data...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message alert alert-danger">
+        {{ error }}
+        <button class="btn btn-sm btn-primary ms-2" (click)="refresh()">Retry</button>
+    </div>
+
+    <div class="chart-wrapper">
+        <canvas id="portsChart"></canvas>
+    </div>
+
+    <button class="btn btn-secondary mt-3" (click)="refresh()">
+        Refresh Data
+    </button>
+</div>

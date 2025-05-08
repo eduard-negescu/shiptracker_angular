@@ -1,0 +1,70 @@
+<!-- ports.component.html -->
+<h1 id="tableLabel">Ports</h1>
+
+<!-- Error Message -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Loading Indicator -->
+<p *ngIf="loading$ | async"><em>Loading...</em></p>
+
+<!-- Add Port Form -->
+<div class="mb-3">
+  <h3>Add New Port</h3>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" [(ngModel)]="newPort.name" placeholder="Port name">
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="newPort.countryId">
+        <option value="0" disabled selected>Select Country</option>
+        <option *ngFor="let country of countries$ | async" [value]="country.id">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100" (click)="addPort()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ports List -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Port Name</th>
+      <th>Country</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let port of ports$ | async">
+      <td>{{ port.id }}</td>
+      <td>
+        <span *ngIf="editingPort?.id !== port.id">{{ port.name }}</span>
+        <input *ngIf="editingPort?.id === port.id" type="text" class="form-control" [(ngModel)]="editedName">
+      </td>
+      <td>
+        <span *ngIf="editingPort?.id !== port.id">{{ port.country?.name }}</span>
+        <select *ngIf="editingPort?.id === port.id" class="form-select" [(ngModel)]="editedCountryId">
+          <option *ngFor="let country of countries$ | async" [value]="country.id">
+            {{ country.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <div *ngIf="editingPort?.id !== port.id" class="btn-group">
+          <button class="btn btn-sm btn-warning me-2" (click)="startEdit(port)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deletePort(port.id)">Delete</button>
+        </div>
+        <div *ngIf="editingPort?.id === port.id" class="btn-group">
+          <button class="btn btn-sm btn-success me-2" (click)="updatePort()">Save</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

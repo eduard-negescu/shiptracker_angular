@@ -1,0 +1,22 @@
+// components/navbar/navbar.component.ts
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
+})
+export class NavbarComponent {
+  navItems = [
+    { path: '/welcome', label: 'Home' },
+    { path: '/countries', label: 'Countries' },
+    { path: '/ports', label: 'Ports' },
+    { path: '/ships', label: 'Ships' },
+    { path: '/voyages', label: 'Voyages' },
+    { path: '/charts', label: 'Ports Chart' }
+  ];
+}

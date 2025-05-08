@@ -1,0 +1,53 @@
+<h1 id="tableLabel">Countries</h1>
+
+<!-- Error Message -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Loading Indicator -->
+<p *ngIf="loading$ | async"><em>Loading...</em></p>
+
+<!-- Add Country Form -->
+<div class="mb-3">
+  <h3>Add New Country</h3>
+  <div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="newCountry.name" placeholder="Country name">
+    <button class="btn btn-primary" (click)="addCountry()">Add</button>
+  </div>
+</div>
+
+<!-- Countries List -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Country Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of countries$ | async">
+      <td>{{ country.id }}</td>
+      <td>
+        <span *ngIf="editingCountry?.id !== country.id">{{ country.name }}</span>
+        <div *ngIf="editingCountry?.id === country.id" class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="editedName">
+          <button class="btn btn-success" (click)="updateCountry()">Save</button>
+          <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </td>
+      <td>
+        <button *ngIf="editingCountry?.id !== country.id" 
+                class="btn btn-sm btn-warning me-2" 
+                (click)="startEdit(country)">
+          Edit
+        </button>
+        <button class="btn btn-sm btn-danger" 
+                (click)="deleteCountry(country.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

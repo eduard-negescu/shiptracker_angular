@@ -1,0 +1,145 @@
+<!-- components/voyage/voyage.component.html -->
+<h1 id="tableLabel">Voyages</h1>
+
+<!-- Error Message -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  {{ error }}
+</div>
+
+<!-- Loading Indicator -->
+<p *ngIf="loading$ | async"><em>Loading...</em></p>
+
+<!-- Add Voyage Form -->
+<div class="mb-3">
+  <h3>Add New Voyage</h3>
+  <div class="row g-3">
+    <div class="col-md-12">
+      <input type="text" class="form-control" [(ngModel)]="newVoyage.name" placeholder="Voyage name">
+    </div>
+    <div class="col-md-4">
+      <label>Voyage Date</label>
+      <input type="date" class="form-control" [(ngModel)]="newVoyage.voyageDate">
+    </div>
+    <div class="col-md-4">
+      <label>Start Date</label>
+      <input type="date" class="form-control" [(ngModel)]="newVoyage.voyageStart">
+    </div>
+    <div class="col-md-4">
+      <label>End Date</label>
+      <input type="date" class="form-control" [(ngModel)]="newVoyage.voyageEnd">
+    </div>
+    <div class="col-md-4">
+      <label>Departure Port</label>
+      <select class="form-select" [(ngModel)]="newVoyage.departurePortId">
+        <option [value]="0" disabled selected>Select Port</option>
+        <option *ngFor="let port of ports$ | async" [value]="port.id">
+          {{ port.name }} ({{ port.country?.name }})
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Arrival Port</label>
+      <select class="form-select" [(ngModel)]="newVoyage.arrivalPortId">
+        <option [value]="0" disabled selected>Select Port</option>
+        <option *ngFor="let port of ports$ | async" [value]="port.id">
+          {{ port.name }} ({{ port.country?.name }})
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>Ship</label>
+      <select class="form-select" [(ngModel)]="newVoyage.shipId">
+        <option [value]="0" disabled selected>Select Ship</option>
+        <option *ngFor="let ship of ships$ | async" [value]="ship.id">
+          {{ ship.name }} (Max speed: {{ ship.maximumSpeed }})
+        </option>
+      </select>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="addVoyage()">Add Voyage</button>
+    </div>
+  </div>
+</div>
+
+<!-- Voyages List -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Dates</th>
+      <th>Ports</th>
+      <th>Ship</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let voyage of voyages$ | async">
+      <td>{{ voyage.id }}</td>
+      <td>
+        <span *ngIf="editingVoyage?.id !== voyage.id">{{ voyage.name }}</span>
+        <input *ngIf="editingVoyage?.id === voyage.id" type="text" class="form-control" [(ngModel)]="editData.name">
+      </td>
+      <td>
+        <span *ngIf="editingVoyage?.id !== voyage.id">
+          {{ voyage.voyageDate }}<br>
+          {{ voyage.voyageStart }} - {{ voyage.voyageEnd }}
+        </span>
+        <div *ngIf="editingVoyage?.id === voyage.id" class="row g-2">
+          <div class="col-12">
+            <input type="date" class="form-control" [(ngModel)]="editData.voyageDate">
+          </div>
+          <div class="col-6">
+            <input type="date" class="form-control" [(ngModel)]="editData.voyageStart">
+          </div>
+          <div class="col-6">
+            <input type="date" class="form-control" [(ngModel)]="editData.voyageEnd">
+          </div>
+        </div>
+      </td>
+      <td>
+        <span *ngIf="editingVoyage?.id !== voyage.id">
+          From: {{ voyage.departurePort?.name }}<br>
+          To: {{ voyage.arrivalPort?.name }}
+        </span>
+        <div *ngIf="editingVoyage?.id === voyage.id" class="row g-2">
+          <div class="col-12">
+            <select class="form-select" [(ngModel)]="editData.departurePortId">
+              <option *ngFor="let port of ports$ | async" [value]="port.id">
+                {{ port.name }} ({{ port.country?.name }})
+              </option>
+            </select>
+          </div>
+          <div class="col-12">
+            <select class="form-select" [(ngModel)]="editData.arrivalPortId">
+              <option *ngFor="let port of ports$ | async" [value]="port.id">
+                {{ port.name }} ({{ port.country?.name }})
+              </option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td>
+        <span *ngIf="editingVoyage?.id !== voyage.id">
+          {{ voyage.ship?.name }}<br>
+          (Max: {{ voyage.ship?.maximumSpeed }})
+        </span>
+        <select *ngIf="editingVoyage?.id === voyage.id" class="form-select" [(ngModel)]="editData.shipId">
+          <option *ngFor="let ship of ships$ | async" [value]="ship.id">
+            {{ ship.name }} (Max speed: {{ ship.maximumSpeed }})
+          </option>
+        </select>
+      </td>
+      <td>
+        <div *ngIf="editingVoyage?.id !== voyage.id" class="btn-group">
+          <button class="btn btn-sm btn-warning me-2" (click)="startEdit(voyage)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteVoyage(voyage.id)">Delete</button>
+        </div>
+        <div *ngIf="editingVoyage?.id === voyage.id" class="btn-group">
+          <button class="btn btn-sm btn-success me-2" (click)="updateVoyage()">Save</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
