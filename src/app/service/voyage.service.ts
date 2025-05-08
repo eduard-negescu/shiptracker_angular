@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Voyage } from '../store/voyage_store/voyage.model';
+import { API_URL } from './api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoyageService {
-  private apiUrl = 'https://localhost:7167/api/Voyages';
+  private apiUrl = `${API_URL}/Voyages`;
 
   constructor(private http: HttpClient) { }
 

@@ -1,14 +1,14 @@
-// service/port.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Port } from '../store/port_store/port.model';
+import { API_URL } from './api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortService {
-  private apiUrl = 'https://localhost:7167/api/Ports';
+  private apiUrl = `${API_URL}/Ports`;
 
   constructor(private http: HttpClient) { }
 

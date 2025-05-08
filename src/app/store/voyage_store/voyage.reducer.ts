@@ -1,4 +1,3 @@
-// store/voyage_store/voyage.reducer.ts
 import { createReducer, on } from "@ngrx/store";
 import { VoyageState } from "./voyage.model";
 import * as VoyageActions from "./voyage.action";

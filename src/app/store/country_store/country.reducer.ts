@@ -1,13 +1,7 @@
-// store/country_store/country.reducer.ts
 import { createReducer, on } from "@ngrx/store";  
-import { Country } from "./country.model";  
 import * as CountryActions from "./country.action";  
+import { CountryState } from "./country.model";
 
-export interface CountryState {  
-  countries: Country[];  
-  loading: boolean;  
-  error: string | null;
-}  
 
 export const initialState: CountryState = {  
   countries: [],  

@@ -1,4 +1,3 @@
-// store/ship_store/ship.effect.ts
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ShipService } from "../../service/ship.service";

@@ -1,4 +1,3 @@
-// store/ship_store/ship.action.ts
 import { createAction, props } from "@ngrx/store";
 import { Ship } from "./ship.model";
 

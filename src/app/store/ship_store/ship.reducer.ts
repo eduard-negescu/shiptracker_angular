@@ -1,4 +1,3 @@
-// store/ship_store/ship.reducer.ts
 import { createReducer, on } from "@ngrx/store";  
 import { ShipState } from "./ship.model";  
 import * as ShipActions from "./ship.action";  

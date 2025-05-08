@@ -1,4 +1,3 @@
-// store/voyage_store/voyage.model.ts
 import { Port } from '../port_store/port.model';
 import { Ship } from '../ship_store/ship.model';
 

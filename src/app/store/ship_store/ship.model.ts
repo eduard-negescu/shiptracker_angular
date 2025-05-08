@@ -1,4 +1,3 @@
-// store/ship_store/ship.model.ts
 export interface Ship {
     id: number;
     name: string;

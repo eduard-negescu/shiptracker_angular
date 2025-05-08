@@ -1,4 +1,3 @@
-// store/ship_store/ship.selector.ts
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ShipState } from "./ship.model";
 

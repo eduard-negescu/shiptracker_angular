@@ -1,14 +1,14 @@
-// service/country.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Country, CountryPortsData } from '../store/country_store/country.model';
+import { API_URL } from './api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
-  private apiUrl = 'https://localhost:7167/api/Countries';
+  private apiUrl = `${API_URL}/Countries`;
 
   constructor(private http: HttpClient) { }
 

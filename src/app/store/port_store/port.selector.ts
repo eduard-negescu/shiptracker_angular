@@ -1,4 +1,3 @@
-// store/port_store/port.selector.ts
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { PortState } from "./port.model";
 

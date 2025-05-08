@@ -1,4 +1,3 @@
-// store/voyage_store/voyage.effect.ts
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { VoyageService } from "../../service/voyage.service";

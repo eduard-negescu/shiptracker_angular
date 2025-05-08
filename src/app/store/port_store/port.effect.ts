@@ -1,4 +1,3 @@
-// store/port_store/port.effect.ts
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { PortService } from "../../service/port.service";
@@ -9,7 +8,7 @@ import * as PortActions from "./port.action";
 export class PortEffect {
   action$ = inject(Actions);
 
-  constructor(private portService: PortService) {}
+  constructor(private portService: PortService) { }
 
   loadPorts$ = createEffect(() =>
     this.action$.pipe(

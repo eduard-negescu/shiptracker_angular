@@ -8,3 +8,10 @@ export interface CountryPortsData {
     countryName: string;
     numberOfPorts: number;
 }
+
+
+export interface CountryState {
+    countries: Country[];
+    loading: boolean;
+    error: string | null;
+}  

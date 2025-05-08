@@ -1,14 +1,14 @@
-// service/ship.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ship } from '../store/ship_store/ship.model';
+import { API_URL } from './api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShipService {
-  private apiUrl = 'https://localhost:7167/api/Ships';
+  private apiUrl = `${API_URL}/Ships`;
 
   constructor(private http: HttpClient) { }
 

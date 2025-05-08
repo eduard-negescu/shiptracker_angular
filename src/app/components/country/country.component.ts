@@ -1,4 +1,3 @@
-// country.component.ts
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as CountryActions from '../../store/country_store/country.action';

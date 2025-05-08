@@ -1,4 +1,3 @@
-// components/country-ports-chart/country-ports-chart.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart } from 'chart.js/auto';

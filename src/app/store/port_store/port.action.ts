@@ -1,4 +1,3 @@
-// store/port_store/port.action.ts
 import { createAction, props } from "@ngrx/store";
 import { Port } from "./port.model";
 

@@ -1,4 +1,3 @@
-// store/voyage_store/voyage.selector.ts
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { VoyageState } from "./voyage.model";
 

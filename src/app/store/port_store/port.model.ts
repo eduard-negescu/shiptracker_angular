@@ -1,4 +1,3 @@
-// store/port_store/port.model.ts
 export interface Port {
     id: number;
     name: string;

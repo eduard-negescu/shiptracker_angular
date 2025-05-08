@@ -1,4 +1,3 @@
-// store/voyage_store/voyage.action.ts
 import { createAction, props } from "@ngrx/store";
 import { Voyage } from "./voyage.model";
 
